@@ -1,0 +1,376 @@
+@startuml
+skinparam linetype ortho
+left to right direction
+package Game {
+
+package Main {
+class User {
+}
+}
+
+package Control {
+class Storyteller {
+}
+}
+
+package Entities {
+class Entity {
+}
+}
+
+package World {
+class Tile {
+-coo : Vec
+-onTile : OnTile*
+-hardness : float
++thermal_package : ThermalPackage
+-resistance_environment : map<EnvironmentDamagesType,float>
+}
+abstract OnTile {
+-coo : Vec
+-name : OnTileName
+-tile_owners : vector<Tile*>
+-size_x : int
+-size_y : int
+-durability : float
+-max_durability : float
+-hardness : float
++thermal_package : ThermalPackage
+-resistance_environment : map<EnvironmentDamagesType,float>
+..Getter..
++""Vec"" getCoo()
++""OnTileName"" getName()
++""vector<Tile*>"" getTileOwners()
+}
+class Furniture {
+-isStation : bool
+-
+}
+Furniture --> OnTile
+
+}
+
+package ItemManager {
+class Storage {
+-list : vector<Item*>
+-current_mass : float
+-current_volume : float
+-max_volume : float
+-has_fluid : bool
+-has_unmixable : bool
+-tile_owner : Tile*
+-container_owner : Container*
+-furniture_owner : Furniture*
+-entity_owner : Entity*
+..Getter..
++""bool"" hasFluid()
++""bool"" hasUnmixable()
+..Methods..
++""bool"" canTake(Unique* item)
++""int"" canTake(Stackable* item, int nb)
+-""Stackable*"" searchForMerge(Stackable* item)
++""void"" putInTY(Unique* item)
++""void"" putInTY(Stackable* item, int nb)
+}
+}
+
+package Items {
+abstract Item {
+-id : int
+-description : string
++date_of_creation : Date
+-descprition_branch : vector<Categories>
+-name : ItemsName
+-storage_owner : Storage*
+-mass : float
+-volume : float
+-edible : bool
+-stackable : bool
+-is_fluid : bool
+-is_burning : bool
+-durability : float
+-max_durability : float
+-flammability : float
+-beauty : map<Religion*,float>
+-resistance_environment : map<EnvironmentDamagesType,float>
+..Getter..
++virtual ""ClassesName"" getClass()
++""bool"" isBurning()
++""bool"" isEdible()
++""bool"" isFluid()
++""bool"" isStackable()
++""string"" getStringName()
++""ObjectsName"" getName()
++""vector<Categories>*"" getDescriptionBranch()
++""string"" getDescription()
++""Storage*"" getStorageOwner()
++""float"" getMass()
++""float"" getVolume()
+..Setter..
++""void"" addDurability(float quantity)
++""bool"" substractDurability(float quantity)
++""void"" setBurning(bool boo)
+..Methods..
+}
+class Stackable {
+-number : int
+-is_mixable : bool
+-unique_volume : float
+-unique_mass : float
+-unique_durability : float
+..Getter..
++override ""ClassesName"" getClass()
++""float"" getUniqueMass()
++""float"" getUniqueVolume()
++""float"" getUniqueDurability()
++""bool"" isMixable()
++"""int"" getNumber()
+..Setter..
++""void"" addNumber(int nb)
++""void"" substractNumber(int nb)
+..Methods..
++""void"" mergeTY(Stackable* item, int nb)
+}
+Stackable -right-> Item
+abstract Unique {
+-author : string
+-quality : float
+..Getter..
++""string"" getAuthor()
++""string"" getStringQuality()
++""float"" getQuality()
+}
+Unique -down-> Item
+class Tool {
+-sharpness : float
+-piercing : float
+-blunt : float
+-hardness : float
+-tool_type : ToolType
+..Getter..
++override ""ClassesName"" getClass()
++""ToolType"" getToolType()
+}
+Tool --> Unique
+class Container {
+-storage : Storage*
++thermal_package : ThermalPackage
+-leakage : float
+-empty_mass : float
+..Getter..
++override ""ClassesName"" getClass()
++""Storage*"" getStorage()
+}
+Container --> Unique
+class Meal {
++override ""ClassesName"" getClass()
+}
+Meal --> Unique
+class Apparel {
++override ""ClassesName"" getClass()
+}
+Apparel --> Unique
+class Instrument {
++override ""ClassesName"" getClass()
+}
+Instrument --> Unique
+class Miscellaneous {
++override ""ClassesName"" getClass()
+}
+Miscellaneous --> Unique
+}
+
+package EnumsRelated {
+class Recipe {
+-product_name : ItemsName
+-product_quantity : int
+-stations : vector<Stations>
+-work : int
+-skills_level : vector<SkillsLevels>
+-materials : vector<CategoriesQuantitiesQualityBonusrs>
+}
+class Religion {
+-name : string
+-date_of_creation : Date
+-gods : vector<Gods*>
+}
+class Gods {
+-name : string
+-religion : Religion*
+}
+}
+
+package Factory {
+entity ItemData {
+all_items : map <ItemsName,Item*>
+all_recipes : map<ItemsName,Recipe*>
+}
+}
+
+package Basic {
+class Date {
+-minute : int
+-hour : int
+-day : int
+-month : int
+-year : int
++""string"" getDate()
++""float"" howOldInDays()
+}
+class Vec {
+-x : float
+-y : float
+}
+class ThermalManager {
+-capacity : float
+-conductivity : float
+-albedo : float
+-temperature : float
+-flow : float
+-mass : float
+-surface : float
+..Getter..
++""float"" getTemperature()
+..Methods..
++""void"" updateTemperature(float sun_exposition)
++""void"" getFlowFrom(Tile* tile)
++""void"" getFlowFrom(OnTile* onTile)
+}
+entity ExternBasic {
+current_date : Date*
+current_langage : Langage
+items_name_to_string : map<Langage, map<ItemsName, string> >
+tool_to_action_bonus : map<ToolsType,Actions>
+}
+}
+
+package Enums {
+enum Actions {
+MINE
+CHOP
+DIG
+PLOUGH
+ATTACK_MELEE
+ATTACK_DISTANCE
+}
+enum Categories {
+WOOD
+STONE
+ORE
+TOOL
+MEAL
+WEAPON
+FURNITURE
+APPAREL
+ARMOR
+CLOTHES
+HAT
+TOP
+BOTTOM
+BOOTS
+}
+enum ToolsType {
+SHOVEL
+PICKAXE
+AXE
+HOE
+SWORD
+SPEAR
+BOW
+KNIFE
+}
+enum ClassesName {
+..Items..
+STACKABLE
+TOOL
+CONTAINER
+MEAL
+APPAREL
+MISCELLANEOUS
+INSTRUMENT
+..OnTile..
+FURNITURE
+MATERIAL
+PLANT
+}
+enum OnTileName {
+..Plants..
+OAK
+PINE
+BERRY_BUSH
+
+..Materials..
+..Chunck..
+AIR
+GRANITE
+WOODEN_WALL
+..Ores..
+IRON_ORE
+GOLD_ORE
+COPPER_ORE
+TIN_ORE
+COAL_ORE
+
+..Furnitures..
+..Not a Station..
+CHAIR
+TABLE
+SIDE_TABLE
+SHELF
+CHEST
+.. Station..
+CRAFTING_BENCH
+KITCHEN_COUNTER
+CAMPFIRE
+ANVIL
+
+}
+enum ItemsName {
+..Liste non exhaustive..
+WOODEN_SPEAR
+BLUE_BERRIES
+IRON_CHUNCK
+IRON_INGOT
+}
+enum EntityName {
+..Animals..
+FOX
+COW
+..Monsters..
+ZOMBIE
+SPIDER
+}
+enum EnvironmentDamagesType {
+HUMIDITY
+FIRE
+OUTDOOR
+COLD
+BLUNT
+SHARP
+PIERCE
+}
+enum Langage {
+FRENCH
+ENGLISH
+}
+}
+
+Main --|> Control
+Control --|> Entities
+Entities --|> World
+World --|> ItemManager
+ItemManager --|> Items
+Items --|> EnumsRelated
+EnumsRelated --|> Factory
+Factory --|> Basic
+Basic --|> Enums
+
+ItemData ..> Item
+ItemData ..> Recipe
+Item ..> Storage
+Storage ..> Tile
+Storage ..> Furniture
+
+}
+
+@enduml
