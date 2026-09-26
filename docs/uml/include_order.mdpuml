@@ -1,0 +1,34 @@
+left to right direction
+@startuml
+rectangle User
+rectangle Storyteller
+rectangle Event
+rectangle Weather
+rectangle WorldGenerator
+rectangle Entity
+rectangle OnTile
+rectangle Tile
+rectangle Storage
+rectangle Item
+rectangle Factory
+rectangle Basic
+rectangle Enums
+rectangle EnumsRelated
+
+User --|> Storyteller
+Storyteller --|> Event
+Event --|> Weather
+Weather --|> EnumsRelated
+Storyteller --|> Entity
+Entity --|> Furniture
+Entity --|> Tile
+Storyteller --|> WorldGenerator
+WorldGenerator --|> EnumsRelated
+OnTile --|> Storage
+Tile --|> Storage
+Storage --|> Item
+Item --|> EnumsRelated
+EnumsRelated--|> Factory
+Factory --|> Basic
+Basic --|> Enums
+@enduml
