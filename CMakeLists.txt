@@ -12,7 +12,11 @@ endif()
 project ("CFSG_Project")
 
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (CFSG_Project "CFSG_Project.cpp" "CFSG_Project.h")
+add_executable (CFSG_Project "src/main.cpp")
+
+#Note où est le dossier des headers
+target_include_directories(CFSG_Project PRIVATE include)
+
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET CFSG_Project PROPERTY CXX_STANDARD 20)
