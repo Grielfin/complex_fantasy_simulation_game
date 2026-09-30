@@ -3,23 +3,49 @@ skinparam linetype ortho
 left to right direction
 package Game {
 
-package Main {
+package MAIN {
 class User {
 }
+class MainWindow {
+}
 }
 
-package Control {
+package GAME_MANAGER {
 class Storyteller {
 }
+class Engine {
+}
+class Display {
+}
 }
 
-package Entities {
-class Entity {
+package WORLD_BUILDING {
+class WorldGenerator {
+}
+class MapGenerator {
 }
 }
 
-package World {
-class Tile {
+package EVENTS {
+class Event {
+}
+class Weather {
+}
+}
+
+package ENTITIES {
+abstract Entity {
+}
+class Humanoid {
+}
+class Animal {
+}
+Humanoid --> Entity
+Animal --> Entity
+}
+
+package WORLD_ASSETS {
+class GroundTile {
 -coo : Vec
 -ground_storage : Storage*
 -onTile : OnTile*
@@ -31,6 +57,8 @@ class Tile {
 ..Getter..
 +""Material"" getMaterial()
 }
+class RoofTile {
+}
 abstract OnTile {
 -coo : Vec
 -name : OnTileName
@@ -41,6 +69,7 @@ abstract OnTile {
 -max_durability : float
 -hardness : float
 -can_be_roofed : bool
+-can_be_walked_on : bool
 -material : Material
 +heat_manager : HeatManager
 -resistance_environment : map<EnvironmentDamagesType,float>
@@ -55,11 +84,16 @@ class Furniture {
 -author : string
 -working_positions : vector<Vec>
 }
+class Plant {
+}
+class Block {
+}
 Furniture --> OnTile
-
+Plant --> OnTile
+Block --> OnTile
 }
 
-package ItemManager {
+package ITEM_MANAGER {
 class Storage {
 -list : vector<Item*>
 -current_mass : float
@@ -83,7 +117,7 @@ class Storage {
 }
 }
 
-package Items {
+package ITEMS {
 abstract Item {
 -id : int
 -description : string
@@ -186,14 +220,14 @@ Instrument --> Unique
 class FurnitureToBeBuilt {
 +override ""ClassesName"" getClass()
 }
-FurnitureToBeBuilt --> Unique
+ToBeBuilt --> Unique
 class Miscellaneous {
 +override ""ClassesName"" getClass()
 }
 Miscellaneous --> Unique
 }
 
-package EnumsRelated {
+package DATA_AND_RELATIONS {
 class Recipe {
 -product_name : ItemsName
 -product_quantity : int
@@ -210,32 +244,6 @@ class Religion {
 class Gods {
 -name : string
 -religion : Religion*
-}
-}
-
-package Factory {
-entity ItemData {
-all_items : map <ItemsName,Item*>
-all_recipes : map<ItemsName,Recipe*>
-}
-entity HeatData {
-material_to_heat_parameters : map<Material,HeatParameters>
-}
-}
-
-package Basic {
-class Date {
--minute : int
--hour : int
--day : int
--month : int
--year : int
-+""string"" getDate()
-+""float"" howOldInDays()
-}
-class Vec {
--x : float
--y : float
 }
 class HeatParameters {
 -massic_capacity : float
@@ -256,6 +264,32 @@ class HeatManager {
 +""void"" getFlowFromLight(float exposition)
 +""void"" getFlowFromTile(Tile* tile)
 }
+}
+
+package FACTORY {
+entity ItemData {
+all_items : map <ItemsName,Item*>
+all_recipes : map<ItemsName,Recipe*>
+}
+entity HeatData {
+material_to_heat_parameters : map<Material,HeatParameters>
+}
+}
+
+package BASIC {
+class Date {
+-minute : int
+-hour : int
+-day : int
+-month : int
+-year : int
++""string"" getDate()
++""float"" howOldInDays()
+}
+class Vec {
+-x : float
+-y : float
+}
 entity ExternBasic {
 current_date : Date*
 current_langage : Langage
@@ -264,7 +298,7 @@ tool_to_action_bonus : map<ToolsType,Actions>
 }
 }
 
-package Enums {
+package ENUMS {
 enum Actions {
 MINE
 CHOP
@@ -382,20 +416,23 @@ ENGLISH
 }
 }
 
-Main --|> Control
-Control --|> Entities
-Entities --|> World
-World --|> ItemManager
-ItemManager --|> Items
-Items --|> EnumsRelated
-EnumsRelated --|> Factory
-Factory --|> Basic
-Basic --|> Enums
+MAIN --|> GAME_MANAGER
+GAME_MANAGER --|> WORLD_BUILDING
+WORLD_BUILDING --|> DATA_AND_RELATIONS
+GAME_MANAGER --|> EVENTS
+EVENTS --|> ENTITIES
+ENTITIES --|> WORLD_ASSETS
+WORLD_ASSETS --|> ITEM_MANAGER
+ITEM_MANAGER --|> ITEMS
+ITEMS --|> DATA_AND_RELATIONS
+DATA_AND_RELATIONS --|> FACTORY
+FACTORY --|> BASIC
+BASIC --|> ENUMS
 
 ItemData ..> Item
 ItemData ..> Recipe
 Item ..> Storage
-Storage ..> Tile
+Storage ..> GroundTile
 Storage ..> Furniture
 
 }
