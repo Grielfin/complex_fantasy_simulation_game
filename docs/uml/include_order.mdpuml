@@ -1,34 +1,80 @@
 left to right direction
 @startuml
-rectangle User
-rectangle Storyteller
-rectangle Event
-rectangle Weather
-rectangle WorldGenerator
-rectangle Entity
-rectangle OnTile
-rectangle Tile
-rectangle Storage
-rectangle Item
-rectangle Factory
-rectangle Basic
-rectangle Enums
-rectangle EnumsRelated
+class MAIN {
++User : class
++MainWindow : class
+}
+class GAME_MANAGER {
++StoryTeller : class
++Engine : class
++Display : class
+}
+class WORLD_BUILDING {
++WorldGenerator : class
++MapGenerator : class
+}
+class EVENTS {
++Event : class
++Weather : class
+}
+class ENTITIES {
+-Entity : abstract
++E:Humanoid : class
++E:Animal : class
+}
+class WORLD_ASSETS {
++GroundTile : class
++RoofTile : class
+-OnTile : abstract
++OT:Furniture : class
++OT:Plant : class
++OT:Block : class
+}
+class ITEM_MANAGER {
++Storage : class
+}
+class ITEMS {
+-Item : abstract
++I:Stackable : class
+-I:Unique : abstract
++I:U:Tool : class
++I:U:Container : class
++I:U:Meal : class
++I:U:Apparel : class
++I:U:ToBeBuilt : class
++I:U:Instrument : class
++I:U:Miscellaneous : class
+}
+class DATA_AND_RELATIONS {
++Recipe : class
++Religion : class
++God : class
++HeatData : class
++HeatManager : class
+}
+class FACTORY {
++ItemData : class
++HeatData : class
+}
+class BASIC {
++Vec : class
++Date : class
+extern_variables
+}
+class ENUMS {
+all_enums
+}
 
-User --|> Storyteller
-Storyteller --|> Event
-Event --|> Weather
-Weather --|> EnumsRelated
-Storyteller --|> Entity
-Entity --|> Furniture
-Entity --|> Tile
-Storyteller --|> WorldGenerator
-WorldGenerator --|> EnumsRelated
-OnTile --|> Storage
-Tile --|> Storage
-Storage --|> Item
-Item --|> EnumsRelated
-EnumsRelated--|> Factory
-Factory --|> Basic
-Basic --|> Enums
+MAIN --|> GAME_MANAGER
+GAME_MANAGER --|> EVENTS
+EVENTS --|> ENTITIES
+GAME_MANAGER --|> WORLD_BUILDING
+WORLD_BUILDING --|> DATA_AND_RELATIONS
+ENTITIES --|> WORLD_ASSETS
+WORLD_ASSETS --|> ITEM_MANAGER
+ITEM_MANAGER --|> ITEMS
+ITEMS --|> DATA_AND_RELATIONS
+DATA_AND_RELATIONS --|> FACTORY
+FACTORY --|> BASIC
+BASIC --|> ENUMS
 @enduml
