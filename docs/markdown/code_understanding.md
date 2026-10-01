@@ -7,5 +7,31 @@ each of their methods, who calls it and for what.
 
 ## Macro
 
+### Vocabulary
+- The game will run with a loop in the *Engine* class. Each step of the loop will be
+called a *"tick"*. Some actions, in order to optimize, do not need to be run every tick,
+they will be every *"step"*. A step may clock 1 to 4 times a second while tick will
+be around 20/s. FPS still stands for *"frame per second"*, therefore, it is not linked
+to how fast the *Engine* loops, but on how fast the *Display* does, it can be up to 
+60/s for example.
+
+### Heat Management
+- Each object influenced by temperature needs to interact with the world around
+to get its new temperature every step.  
+- Because every object can be made up of several materials, each one will have
+a *material_composition*, and a *HeatManager* attribute.  
+- The goal of the *HeatManager* is **first**, when the object **is created**, to compute
+the average heat capacity, thermal conductivity and albedo of the object. The link
+between material and heat parameters is the *HeatParameters* class linked by a
+map in the *Factory*. **Then**, on **each tick**, the *HeatManager* will compute
+based on the world around the object, the change in temperature.  
+- Objects influenced by temperature are : *Stackable (Item)*, *Container (Unique Item*,
+*Meal (Unique Item)*, *OnTile* and *abstract Entity*
+- *Entity* are subjected to heat, but have protection like *Apparel*, the same goes on with
+*OnTile* being protected by *RoofTile* from sun exposition. While *Apparel* and *RoofTile*
+do not have temperature, their existence will be taken into account as *Entity* and 
+*OnTile* will inform *HeatManager* of a factor to multiply by the flow which 
+directly depends on the protection used.
+
 ## Micro
 
