@@ -59,6 +59,7 @@ class FACTORY {
 class BASIC {
 +Vec : class
 +Date : class
++MaterialPercentage : class
 extern_variables
 }
 class ENUMS {
