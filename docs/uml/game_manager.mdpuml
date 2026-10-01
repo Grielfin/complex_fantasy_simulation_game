@@ -1,0 +1,19 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+package GAME_MANAGER {
+
+class Storyteller {
+}
+
+class Engine {
+}
+
+class Display {
+}
+
+}
+
+@enduml

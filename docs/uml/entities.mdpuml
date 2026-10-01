@@ -1,0 +1,21 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+package ENTITIES {
+
+abstract Entity {
+}
+
+class Humanoid {
+}
+
+class Animal {
+}
+
+Humanoid --> Entity
+Animal --> Entity
+}
+
+@enduml

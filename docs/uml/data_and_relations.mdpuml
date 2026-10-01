@@ -1,0 +1,51 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+package DATA_AND_RELATIONS {
+
+class Recipe {
+-product_name : ItemsName
+-product_quantity : int
+-stations : vector<Stations>
+-work : int
+-skills_level : vector<SkillsLevels>
+-materials : vector<CategoriesQuantitiesQualityBonuses>
+}
+
+class Religion {
+-name : string
+-date_of_creation : Date
+-gods : vector<Gods*>
+}
+
+class Gods {
+-name : string
+-religion : Religion*
+}
+
+class HeatParameters {
+-massic_capacity : float
+-conductivity : float
+-albedo : float
+}
+
+class HeatManager {
+-material : Material
+-mass : mass
+-temperature : float
+-flow : float
+-mass : float
+-surface : float
+-exposed_surface_proportion : float
+..Getter..
++""float"" getTemperature()
+..Methods..
++""void"" getFlowFromLight(float exposition)
++""void"" getFlowFromTile(Tile* tile)
+}
+
+}
+
+@enduml

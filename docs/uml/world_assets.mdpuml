@@ -1,0 +1,62 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+package WORLD_ASSETS {
+
+class GroundTile {
+-coo : Vec
+-ground_storage : Storage*
+-onTile : OnTile*
+-roofR : RoofTile*
+-hardness : float
+-material : Material
++heat_manager : HeatManager
+-resistance_environment : map<EnvironmentDamagesType,float>
+..Getter..
++""Material"" getMaterial()
+}
+
+class RoofTile {
+}
+
+abstract OnTile {
+-coo : Vec
+-name : OnTileName
+-ground_tile_owners : vector<GroundTile*>
+-size_x : int
+-size_y : int
+-durability : float
+-max_durability : float
+-hardness : float
+-can_be_roofed : bool
+-can_be_walked_on : bool
+-material_composition : vector<MaterialPercentage>
++heat_manager : HeatManager
+-resistance_environment : map<EnvironmentDamagesType,float>
+..Getter..
++""Vec"" getCoo()
++""OnTileName"" getName()
++""vector<GroundTile*>"" getGroundTileOwners()
++""bool"" canBeRoofed()
+}
+
+class Furniture {
+-isStation : bool
+-author : string
+-working_positions : vector<Vec>
+}
+
+class Plant {
+}
+
+class Block {
+}
+
+Furniture --> OnTile
+Plant --> OnTile
+Block --> OnTile
+}
+
+@enduml

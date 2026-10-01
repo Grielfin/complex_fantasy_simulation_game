@@ -1,0 +1,138 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+rectangle Storage
+
+package ITEMS {
+
+abstract Item {
+-id : int
+-description : string
++date_of_creation : Date
+-descprition_branch : vector<Categories>
+-name : ItemsName
+-storage_owner : Storage*
+-mass : float
+-volume : float
+-edible : bool
+-stackable : bool
+-is_fluid : bool
+-is_burning : bool
+-durability : float
+-max_durability : float
+-flammability : float
+-beauty : map<Religion*,float>
+-resistance_environment : map<EnvironmentDamagesType,float>
+..Getter..
++virtual ""ClassesName"" getClass()
++""bool"" isBurning()
++""bool"" isEdible()
++""bool"" isFluid()
++""bool"" isStackable()
++""string"" getStringName()
++""ObjectsName"" getName()
++""vector<Categories>*"" getDescriptionBranch()
++""string"" getDescription()
++""Storage*"" getStorageOwner()
++""float"" getMass()
++""float"" getVolume()
+..Setter..
++""void"" addDurability(float quantity)
++""bool"" substractDurability(float quantity)
++""void"" setBurning(bool boo)
+..Methods..
+}
+
+class Stackable {
+-number : int
+-is_mixable : bool
+-unique_volume : float
+-unique_mass : float
+-unique_durability : float
+-material_composition : vector<MaterialPercentage>
++heat_manager : HeatManager
+..Getter..
++override ""ClassesName"" getClass()
++""float"" getUniqueMass()
++""float"" getUniqueVolume()
++""float"" getUniqueDurability()
++""bool"" isMixable()
++""int"" getNumber()
+..Setter..
++""void"" addNumber(int nb)
++""void"" substractNumber(int nb)
+..Methods..
++""void"" mergeTY(Stackable* item, int nb)
+}
+Stackable -right-> Item
+
+abstract Unique {
+-author : string
+-quality : float
+..Getter..
++""string"" getAuthor()
++""string"" getStringQuality()
++""float"" getQuality()
+}
+Unique -down-> Item
+
+class Tool {
+-sharpness : float
+-piercing : float
+-blunt : float
+-hardness : float
+-tool_type : ToolType
+..Getter..
++override ""ClassesName"" getClass()
++""ToolType"" getToolType()
+}
+Tool --> Unique
+
+class Container {
+-storage : Storage*
+-material_composition = vector<MaterialPercentage>
++heat_manager : HeatManager
+-leakage : float
+-empty_mass : float
+..Getter..
++override ""ClassesName"" getClass()
++""Storage*"" getStorage()
+}
+Container --> Unique
+
+class Meal {
+-material_composition = vector<MaterialPercentage>
++heat_manager : HeatManager
+..Getter..
++override ""ClassesName"" getClass()
+}
+Meal --> Unique
+
+class Apparel {
++override ""ClassesName"" getClass()
+}
+Apparel --> Unique
+
+class Instrument {
++override ""ClassesName"" getClass()
+}
+Instrument --> Unique
+
+class ToBeBuilt {
++override ""ClassesName"" getClass()
+}
+ToBeBuilt --> Unique
+
+class Miscellaneous {
++override ""ClassesName"" getClass()
+}
+Miscellaneous --> Unique
+
+}
+
+Container ..> Storage
+Item ..> Storage
+
+@enduml

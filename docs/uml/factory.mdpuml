@@ -1,0 +1,27 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+rectangle Recipe
+rectangle Item
+rectangle HeatParameters
+
+package FACTORY {
+
+entity ItemData {
+all_items : map <ItemsName,Item*>
+all_recipes : map<ItemsName,Recipe*>
+}
+
+entity HeatData {
+material_to_heat_parameters : map<Material,HeatParameters>
+}
+
+ItemData ..> Recipe
+ItemData..> Item
+HeatData ..> HeatParameters
+
+}
+
+@enduml

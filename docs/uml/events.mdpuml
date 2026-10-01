@@ -1,0 +1,16 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+package EVENTS {
+
+class Event {
+}
+
+class Weather {
+}
+
+}
+
+@enduml

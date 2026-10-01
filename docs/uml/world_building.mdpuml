@@ -1,0 +1,16 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+package WORLD_BUILDING {
+
+class WorldGenerator {
+}
+
+class MapGenerator {
+}
+
+}
+
+@enduml

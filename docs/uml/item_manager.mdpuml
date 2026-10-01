@@ -1,0 +1,40 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+rectangle GroundTile
+rectangle Furniture
+rectangle Entity
+
+package ITEM_MANAGER {
+
+class Storage {
+-list : vector<Item*>
+-current_mass : float
+-current_volume : float
+-max_volume : float
+-has_fluid : bool
+-has_unmixable : bool
+-ground_tile_owner : GroundTile*
+-container_owner : Container*
+-furniture_owner : Furniture*
+-entity_owner : Entity*
+..Getter..
++""bool"" hasFluid()
++""bool"" hasUnmixable()
+..Methods..
++""bool"" canTake(Unique* item)
++""int"" canTake(Stackable* item, int nb)
+-""Stackable*"" searchForMerge(Stackable* item)
++""void"" putInTY(Unique* item)
++""void"" putInTY(Stackable* item, int nb)
+}
+
+}
+
+Storage ..> GroundTile
+Storage ..> Furniture
+Storage ..> Entity
+
+@enduml

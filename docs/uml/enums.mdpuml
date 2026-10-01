@@ -1,0 +1,132 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+package ENUMS {
+
+enum Actions {
+MINE
+CHOP
+DIG
+PLOUGH
+ATTACK_MELEE
+ATTACK_DISTANCE
+}
+
+enum Categories {
+WOOD
+STONE
+ORE
+TOOL
+MEAL
+WEAPON
+FURNITURE
+APPAREL
+ARMOR
+CLOTHES
+HAT
+TOP
+BOTTOM
+BOOTS
+}
+
+enum ToolsType {
+SHOVEL
+PICKAXE
+AXE
+HOE
+SWORD
+SPEAR
+BOW
+KNIFE
+}
+
+enum ClassesName {
+..Items..
+STACKABLE
+TOOL
+CONTAINER
+MEAL
+APPAREL
+MISCELLANEOUS
+INSTRUMENT
+..OnTile..
+FURNITURE
+BLOCK
+PLANT
+}
+
+enum OnTileName {
+..Plants..
+OAK
+PINE
+BERRY_BUSH
+..Materials..
+..Chunck..
+AIR
+GRANITE
+WOODEN_WALL
+..Ores..
+IRON_ORE
+GOLD_ORE
+COPPER_ORE
+TIN_ORE
+COAL_ORE
+..Furnitures..
+..Not a Station..
+CHAIR
+TABLE
+SIDE_TABLE
+SHELF
+CHEST
+.. Station..
+CRAFTING_BENCH
+KITCHEN_COUNTER
+CAMPFIRE
+ANVIL
+}
+
+enum ItemsName {
+..Liste non exhaustive..
+WOODEN_SPEAR
+BLUE_BERRIES
+IRON_CHUNCK
+IRON_INGOT
+}
+
+enum EntityName {
+..Animals..
+FOX
+COW
+..Monsters..
+ZOMBIE
+SPIDER
+}
+
+enum Material {
+OAK
+GRANITE
+CLAY
+DIRT
+SNOW
+}
+
+enum EnvironmentDamagesType {
+HUMIDITY
+FIRE
+OUTDOOR
+COLD
+BLUNT
+SHARP
+PIERCE
+}
+
+enum Langage {
+FRENCH
+ENGLISH
+}
+
+}
+
+@enduml

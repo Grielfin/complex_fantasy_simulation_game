@@ -1,0 +1,38 @@
+@startuml
+allowmixing
+skinparam linetype ortho
+left to right direction
+
+package BASIC {
+
+class Date {
+-minute : int
+-hour : int
+-day : int
+-month : int
+-year : int
++""string"" getDate()
++""float"" howOldInDays()
+}
+
+class Vec {
+-x : float
+-y : float
+}
+
+class MaterialPercentage {
+-material : Material
+-percentage : float
+..Getter..
++""Material"" getMaterial()
++""float"" getPercentage()
+}
+
+entity ExternBasic {
+current_date : Date*
+current_langage : Langage
+items_name_to_string : map<Langage, map<ItemsName, string> >
+tool_to_action_bonus : map<ToolsType,Actions>
+}
+
+}
