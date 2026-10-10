@@ -31,12 +31,14 @@ class MaterialPercentage {
 class GroundStats {
 -material_composition : vector<MaterialPercentage>
 -hardness : float
+-max_durability : float
 -walking_speed : float
 -environment_resistance_map : map<EnvironmentDamageType,float>
 ..Getter..
 +""vector<MaterialPercentage>"" getMaterialComposition()
 +""float"" getHardness()
 +""float"" getWalkingSpeed()
++""float"" getMaxDurability()
 +""float"" getResistanceEnvironment(EnvironmentDamageType damage_type)
 }
 

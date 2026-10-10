@@ -10,29 +10,29 @@ class GroundTile {
 -ground_storage : Storage*
 -onTile : OnTile*
 -ground_type : GroundTypes
--durability : int
--max_durability : int
+-durability : float
 +heat_manager : HeatManager
-..Getter..
+..Getter Const..
 +""float"" getHardness()
++""float"" getMaxDurability()
 +""vector<MaterialPercentage>"" getMaterialComposition()
 +""float"" getWalkingSpeed()
 +""float"" getResistanceEnvironment(EnvironmentDamageType damage_type)
+..Getter..
++""float"" getDurability()
 }
 
 abstract OnTile {
 -coo : Vec
 -name : OnTileName
--ground_tile_owners : vector<GroundTile*>
--size_x : int
--size_y : int
+-ground_tile_owner : GroundTile*
 -durability : float
 -max_durability : float
 -hardness : float
 -can_be_walked_on : bool
 -material_composition : vector<MaterialPercentage>
-+heat_manager : HeatManager
 -resistance_environment : map<EnvironmentDamagesType,float>
++heat_manager : HeatManager
 ..Getter..
 +""Vec"" getCoo()
 +""OnTileName"" getName()
@@ -40,6 +40,8 @@ abstract OnTile {
 }
 
 class Furniture {
+-size_x : int
+-size_y : int
 -isStation : bool
 -author : string
 -working_positions : vector<Vec>
@@ -52,9 +54,13 @@ class Block {
 -natural_floor : FloorType
 }
 
+class Liquid {
+}
+
 Furniture --> OnTile
 Plant --> OnTile
 Block --> OnTile
+Liquid --> OnTile
 }
 
 @enduml
