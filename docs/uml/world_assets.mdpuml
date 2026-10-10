@@ -9,7 +9,7 @@ class GroundTile {
 -coo : Vec
 -ground_storage : Storage*
 -onTile : OnTile*
--floor_type : FloorTypes
+-ground_type : GroundTypes
 -durability : int
 -max_durability : int
 +heat_manager : HeatManager

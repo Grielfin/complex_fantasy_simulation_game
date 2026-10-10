@@ -14,7 +14,7 @@ ATTACK_MELEE
 ATTACK_DISTANCE
 }
 
-enum FloorTypes {
+enum GroundTypes {
 NATURAL_ROCK
 GRAVEL
 POLISHED_ROCK
@@ -22,6 +22,7 @@ DRY_DIRT
 MUD
 GRASSY_DIRT
 SNOW
+OAK_PLANKS
 }
 
 enum Categories {
