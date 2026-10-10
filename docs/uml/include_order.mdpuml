@@ -29,6 +29,7 @@ class WORLD_ASSETS {
 +OT:Furniture : class
 +OT:Plant : class
 +OT:Block : class
++OT:Liquid : class
 }
 class ITEM_MANAGER {
 +Storage : class
@@ -53,13 +54,16 @@ class DATA_AND_RELATIONS {
 +HeatManager : class
 }
 class FACTORY {
-+ItemData : class
-+HeatData : class
++ItemData : extern
++HeatData : extern
++TileData : extern
++EntitySave : extern
 }
 class BASIC {
 +Vec : class
 +Date : class
 +MaterialPercentage : class
++GroundStats : class
 extern_variables
 }
 class ENUMS {
