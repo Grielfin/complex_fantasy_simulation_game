@@ -9,16 +9,15 @@ class GroundTile {
 -coo : Vec
 -ground_storage : Storage*
 -onTile : OnTile*
--roofR : RoofTile*
--hardness : float
--material : Material
+-floor_type : FloorTypes
+-durability : int
+-max_durability : int
 +heat_manager : HeatManager
--resistance_environment : map<EnvironmentDamagesType,float>
 ..Getter..
-+""Material"" getMaterial()
-}
-
-class RoofTile {
++""float"" getHardness()
++""vector<MaterialPercentage>"" getMaterialComposition()
++""float"" getWalkingSpeed()
++""float"" getResistanceEnvironment(EnvironmentDamageType damage_type)
 }
 
 abstract OnTile {
@@ -30,7 +29,6 @@ abstract OnTile {
 -durability : float
 -max_durability : float
 -hardness : float
--can_be_roofed : bool
 -can_be_walked_on : bool
 -material_composition : vector<MaterialPercentage>
 +heat_manager : HeatManager
@@ -39,7 +37,6 @@ abstract OnTile {
 +""Vec"" getCoo()
 +""OnTileName"" getName()
 +""vector<GroundTile*>"" getGroundTileOwners()
-+""bool"" canBeRoofed()
 }
 
 class Furniture {
@@ -52,6 +49,7 @@ class Plant {
 }
 
 class Block {
+-natural_floor : FloorType
 }
 
 Furniture --> OnTile

@@ -28,6 +28,18 @@ class MaterialPercentage {
 +""float"" getPercentage()
 }
 
+class GroundStats {
+-material_composition : vector<MaterialPercentage>
+-hardness : float
+-walking_speed : float
+-environment_resistance_map : map<EnvironmentDamageType,float>
+..Getter..
++""vector<MaterialPercentage>"" getMaterialComposition()
++""float"" getHardness()
++""float"" getWalkingSpeed()
++""float"" getResistanceEnvironment(EnvironmentDamageType damage_type)
+}
+
 entity ExternBasic {
 current_date : Date*
 current_langage : Langage

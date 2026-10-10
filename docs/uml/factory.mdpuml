@@ -6,21 +6,36 @@ left to right direction
 rectangle Recipe
 rectangle Item
 rectangle HeatParameters
+rectangle Entity
 
 package FACTORY {
 
+package Data {
 entity ItemData {
-all_items : map <ItemsName,Item*>
-all_recipes : map<ItemsName,Recipe*>
+item_name_to_clone : map<ItemsName,Item*>
+item_name_to_recipe : map<ItemsName,Recipe*>
 }
 
 entity HeatData {
 material_to_heat_parameters : map<Material,HeatParameters>
 }
 
+entity TileData {
+groud_tile_name_stats : vector
+}
+
 ItemData ..> Recipe
 ItemData..> Item
 HeatData ..> HeatParameters
+}
+
+package Save {
+entity EntitySave {
+all_entities : vector<Entity*>
+}
+
+EntitySave ..> Entity
+}
 
 }
 
