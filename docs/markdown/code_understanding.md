@@ -25,6 +25,15 @@ that you may need many checks before commiting to the action. Some character may
 need to check if there is enough space in a storage before walking to it, then check
 again just before putting the item in.
 
+### Philosophy of development
+- Some objects may have common features, for example, two furnaces have common size
+and material but maybe different storage. The idea is to save the the type of the object
+through the use of enums, and link it using *map<type, stats>* to save only one time all
+common attributes that should not change but only be read, which would save memory space.
+The exception would be *Item*, as there are too many child classes of this abstract.
+This separation allows the concept of *Const Getter* which get common const data from the
+*Factory*, and normal *Getter* which get variable attributes.
+
 ### Heat Management
 - Each object influenced by temperature needs to interact with the world around
 to get its new temperature every step.  
@@ -49,9 +58,12 @@ directly depends on the protection used.
 ### Coding style
 - There will be no *shared_ptr* nor *unique_ptr* as many classes are daughter of
 abstracts/classes. Instead, I will use classic *pointers* using the keyword *new*
-and storing every objects in the *Factory*.
+and storing every objects in the *Factory* if they are not already linked to an object.
 - There will be very few array, replacing them by *vector* which will have a "fixed"
 capacity by using the keyword *reserve* just after creating a *vector*.
+-The *map<enum, stats>* in the *Factory* is only a mental concept. In the code, these
+objects will be *vector* where the index is directly the *enum*, which is slightly faster
+to read.
 
 ### Storage
 >This class is not linked to anything physical. Its principal attributes are :  
