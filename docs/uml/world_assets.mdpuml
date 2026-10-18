@@ -6,9 +6,10 @@ left to right direction
 package WORLD_ASSETS {
 
 class GroundTile {
--coo : Vec
+-coo : Vec3D
 -ground_storage : Storage*
 -onTile : OnTile*
+-floor_type : FloorTypes
 -ground_type : GroundTypes
 -durability : float
 +heat_manager : HeatManager
@@ -23,7 +24,7 @@ class GroundTile {
 }
 
 abstract OnTile {
--coo : Vec
+-coo : Vec3D
 -name : OnTileName
 -ground_tile_owner : GroundTile*
 -durability : float
@@ -40,18 +41,17 @@ abstract OnTile {
 }
 
 class Furniture {
--size_x : int
--size_y : int
+-size : Vec2D
 -isStation : bool
 -author : string
--working_positions : vector<Vec>
+-working_positions : vector<Vec2D>
 }
 
 class Plant {
 }
 
 class Block {
--natural_floor : FloorType
+-ground_type : GroundTypes
 }
 
 class Liquid {

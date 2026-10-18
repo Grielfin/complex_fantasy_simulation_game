@@ -15,9 +15,26 @@ class Date {
 +""float"" howOldInDays()
 }
 
-class Vec {
--x : float
--y : float
+class Vec2D {
++x : int
++y : int
+}
+
+class Vec2Df {
++x : float
++y : float
+}
+
+class Vec3D {
++x : int
++y : int
++z : int
+}
+
+class Vec3Df {
++x : float
++y : float
++z : float
 }
 
 class MaterialPercentage {
@@ -28,7 +45,7 @@ class MaterialPercentage {
 +""float"" getPercentage()
 }
 
-class GroundStats {
+class GroundFloorStats {
 -material_composition : vector<MaterialPercentage>
 -hardness : float
 -max_durability : float

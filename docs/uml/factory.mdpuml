@@ -21,7 +21,8 @@ material_to_heat_parameters : map<Material,HeatParameters>
 }
 
 entity TileData {
-groud_type_to_ground_stats : map<GroundTypes,GroundStats>
+groud_type_to_ground_stats : map<GroundTypes,GroundFloorStats>
+floor_type_to_floor_stats : map<FloorTypes,GroundFloorStats>
 }
 
 ItemData ..> Recipe

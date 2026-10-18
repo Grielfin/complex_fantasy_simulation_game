@@ -8,7 +8,7 @@ each of their methods, who calls it and for what reason(s).
 ## Macro
 
 ### Vocabulary
-- Attributes will be written as the following : *"<name_of_variable> : <type_of_variable>"*.
+- Attributes will be written as the following in UML : *"<name_of_variable> : <type_of_variable>"*.
 - When describing methods of a class, the word *this* relates to the object the methods
 calls on, as in "obj.f()", *this* relates to *obj*.
 - The game will run with a loop in the *Engine* class. Each step of the loop will be
@@ -52,6 +52,22 @@ in temperature.
 do not have temperature, their existence will be taken into account as *Entity* and 
 *OnTile* will inform *HeatManager* of a factor to multiply by the flow which 
 directly depends on the protection used.
+
+### Floor, Ground, Roof and Tiles
+- The world is represented by a 3D array of *GroundTile*. Each of them already exists when
+the world is createad, because even air has to be simulated. *GroundTile* contains
+a *GroundTypes* enum which, thanks to the factory, is linked to a *GroundFloorStats* object
+which stores all information related to such ground. On top of a *GroundTile* can be put a
+floor, represented by the *FloorTypes* enum. It behaves the same as a ground, but is
+artificial, it does not replace a ground, which can only be deleted if the block underneath
+is broken. A floor can exist with no ground underneath. A story in a building relies on floor
+"floating" on a *Air GroundTypes* and a *Air Block:OnTile* underneath.
+- Whatever something is put on the ground, it is from the *OnTile* abstract. It can be
+more than one tile wide, and is therefore linked to many *GroundTile*. It can either be
+a *Block*, a *Plant*, a *Furniture* or a *Liquid*.
+- When a *Block* is built, the *GroundTile* on top of it gets the ground associated with the
+block. Moreover, nearby *OnTile* will have their attribute *can_be_roofed* set to true, this
+allows *GroundTile* with *Air GroundTypes* to hold a floor.
 
 ## Micro
 
