@@ -37,6 +37,16 @@ class Vec3Df {
 +z : float
 }
 
+class BeautyStats {
+-strongness : float
+-beauty_type : BeautyTypes
+-beauty_cause : BeautyCauses
+..Getter..
++""float"" getStrongness()
++""BeautyTypes"" getBeautyType()
++""beautyCauses"" getBeautyCause()
+}
+
 class MaterialPercentage {
 -material : Material
 -percentage : float

@@ -20,9 +20,16 @@ entity HeatData {
 material_to_heat_parameters : map<Material,HeatParameters>
 }
 
+entity BeautyData {
+item_name_to_beauty : map<ItemsName,BeautyStats>
+ground_type_to_beauty : map<GroundsType,BeautyStats>
+floor_type_to_beauty : map<GroundsType,BeautyStats>
+ontile_name_to_beauty : map<OnTilesName,BeautyStats>
+}
+
 entity TileData {
-groud_type_to_ground_stats : map<GroundTypes,GroundFloorStats>
-floor_type_to_floor_stats : map<FloorTypes,GroundFloorStats>
+groud_type_to_ground_stats : map<GroundsType,GroundFloorStats>
+floor_type_to_floor_stats : map<FloorsType,GroundFloorStats>
 }
 
 ItemData ..> Recipe

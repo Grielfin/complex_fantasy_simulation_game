@@ -9,8 +9,8 @@ class GroundTile {
 -coo : Vec3D
 -ground_storage : Storage*
 -onTile : OnTile*
--floor_type : FloorTypes
--ground_type : GroundTypes
+-floor_type : FloorsType
+-ground_type : GroundsType
 -durability : float
 +heat_manager : HeatManager
 ..Getter Const..
@@ -31,13 +31,18 @@ abstract OnTile {
 -max_durability : float
 -hardness : float
 -can_be_walked_on : bool
+-can_be_roofed : bool
 -material_composition : vector<MaterialPercentage>
 -resistance_environment : map<EnvironmentDamagesType,float>
 +heat_manager : HeatManager
-..Getter..
+..Getter Const..
 +""Vec"" getCoo()
 +""OnTileName"" getName()
 +""vector<GroundTile*>"" getGroundTileOwners()
++""float"" getMaxDurability()
+..Getter..
++""float"" getDurability()
++""float"" canGetRoofed()
 }
 
 class Furniture {

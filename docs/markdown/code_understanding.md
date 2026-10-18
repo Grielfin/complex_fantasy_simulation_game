@@ -53,12 +53,23 @@ do not have temperature, their existence will be taken into account as *Entity* 
 *OnTile* will inform *HeatManager* of a factor to multiply by the flow which 
 directly depends on the protection used.
 
+### Beauty
+- People have different opinion on what and why something is beautiful or disgusting. The
+enum *BeautyTypes* says why something is beautiful (because it is symetric for example),
+while the enum *BeautyCause* says what is beautiful (a face for example).
+- The *BeautyStats* class stores these enums and the *strongness* of what it is stored in
+(the face object stores a *BeautyStats* attributes), and every *Religion* has a positive,
+negative, or no opinion on such combination of *BeautyTypes* and *BeautyCauses* it stores
+in the *beauty_map* attribute.
+- The effective beauty some has for an object according to its Religion is
+*beauty_map[type][cause]\*strongness*
+
 ### Floor, Ground, Roof and Tiles
 - The world is represented by a 3D array of *GroundTile*. Each of them already exists when
 the world is createad, because even air has to be simulated. *GroundTile* contains
-a *GroundTypes* enum which, thanks to the factory, is linked to a *GroundFloorStats* object
+a *GroundsType* enum which, thanks to the factory, is linked to a *GroundFloorStats* object
 which stores all information related to such ground. On top of a *GroundTile* can be put a
-floor, represented by the *FloorTypes* enum. It behaves the same as a ground, but is
+floor, represented by the *FloorsType* enum. It behaves the same as a ground, but is
 artificial, it does not replace a ground, which can only be deleted if the block underneath
 is broken. A floor can exist with no ground underneath. A story in a building relies on floor
 "floating" on a *Air GroundTypes* and a *Air Block:OnTile* underneath.
@@ -67,7 +78,7 @@ more than one tile wide, and is therefore linked to many *GroundTile*. It can ei
 a *Block*, a *Plant*, a *Furniture* or a *Liquid*.
 - When a *Block* is built, the *GroundTile* on top of it gets the ground associated with the
 block. Moreover, nearby *OnTile* will have their attribute *can_be_roofed* set to true, this
-allows *GroundTile* with *Air GroundTypes* to hold a floor.
+allows *GroundTile* with *Air GroundsType* to hold a floor.
 
 ## Micro
 

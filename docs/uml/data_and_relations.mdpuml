@@ -18,6 +18,7 @@ class Religion {
 -name : string
 -date_of_creation : Date
 -gods : vector<Gods*>
+-beauty_map : map<BeautyTypes,map<BeautyCauses,float>>
 }
 
 class Gods {

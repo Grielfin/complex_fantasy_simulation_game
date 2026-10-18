@@ -14,7 +14,7 @@ ATTACK_MELEE
 ATTACK_DISTANCE
 }
 
-enum GroundTypes {
+enum GroundsType {
 AIR
 ROCK
 GRAVEL
@@ -24,12 +24,35 @@ GRASSY_DIRT
 SNOW
 }
 
-enum FloorTypes {
+enum FloorsType {
 NO_FLOOR
 OAK_PLANKS
 SPRUCE_PLANKS
 PAVED_STONE
 POLISHED_STONE
+}
+
+enum BeautyTypes {
+SYMETRICAL
+ASYMETRICAL
+ORDERED
+UNORDERED
+SMALL
+BIG
+SPIKY
+ROUND
+SQUARE
+NATURE
+ARTIFICIAL
+MATERIAL
+RELIGIOUS
+}
+
+enum BeautyCauses {
+BODY
+CLOTHES
+WOOD
+ROCK
 }
 
 enum Categories {
@@ -75,12 +98,12 @@ BLOCK
 PLANT
 }
 
-enum OnTileName {
+enum OnTilesName {
 ..Plants..
 OAK
 PINE
 BERRY_BUSH
-..Materials..
+..Block..
 ..Chunck..
 AIR
 GRANITE
